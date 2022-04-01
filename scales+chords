@@ -1,0 +1,88 @@
+import numpy as np
+
+notesflat = np.array(['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','Cb','C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','Cb'])
+notessharp = np.array(['C','C#','D','D#','E','F','F#','G','G#','A','A#','B','C','C#','D','D#','E','F','F#','G','G#','A','A#','B'])
+scaledict = {
+    "Major": np.array([0,2,4,5,7,9,11,12]), #1
+    "Harmonic Minor": np.array([0,2,3,5,7,8,11,12]), #2
+    "Melodic Minor": np.array([0,2,3,5,7,9,11,12,10,8,7,5,3,2,0]),#3
+    "Natural Minor": np.array([0,2,3,5,7,8,10,12]), #4
+    "Major Pentatonic": np.array([0,2,4,7,9,12]), #5
+    "Minor Pentatonic": np.array([0,3,5,7,10,12]), #6
+    "Major Blues": np.array([0,2,3,4,7,9,12]), #7
+    "Minor Blues": np.array([0,3,5,6,7,10,12]) #8
+} #to be continued
+
+chorddict = {
+    "Major": np.array([0,4,7]), #1
+    "Minor": np.array([0,3,7]), #2
+    "Augmented": np.array([0,4,8]), #3
+    "Diminished": np.array([0,3,6]), #4
+    "Major 7th": np.array([0,4,7,11]), #5
+    "Minor 7th": np.array([0,3,7,10]), #6
+    "Dominant 7th": np.array([0,4,7,10]), #7
+    "Diminished 7th": np.array([0,3,6,9]), #8
+} #to be continued
+
+scaledictlist = list(scaledict)
+chorddictlist = list(chorddict)
+end = False
+
+print("Welcome to my music toy! Thank you for coming. I hope you learn music from this :)")
+while end == False:
+    leave = False
+    errorwhat, errorkey, errorscale, errorchord = False, False, False, False
+    while errorwhat == False:
+        what = str(input("\nWould you like to learn a SCALE or CHORD? \n")).lower()
+        if what not in ['scale','chord']: print('Error: '+ what,'is not an option. Please choose one of the options.')
+        else: errorwhat = True
+    while errorkey == False:
+        whatkey = str(input("\nWhat note would you like to study? \n(e.g. 'Cb' for C flat, or 'F#' for F sharp) \n"))
+        if whatkey in notesflat or whatkey in notessharp: errorkey = True
+        else: print('Error:',whatkey,'is not a note. Please choose a valid note.')
+    if whatkey in notesflat and whatkey not in notessharp: use = 'flats'
+    elif whatkey in notessharp and whatkey not in notesflat: use = 'sharps'
+    else: use = 'any'
+    if what == "scale":
+        while errorscale == False:
+            print("\nWhat type of scale would you like to learn? (Please enter a number)")
+            print("1: Major \n2: Harmonic Minor \n3: Melodic Minor \n4: Natural Minor \n5: Major Pentatonic \n6: Minor Pentatonic \n7: Major Blues \n8: Minor Blues")
+            whatscale = int(input())
+            if whatscale not in range(1,len(scaledict)+1): print('Error:',whatscale,'is not an option. Please select one of the options available.')
+            else: errorscale = True
+        print("\nThe",whatkey,scaledictlist[whatscale-1],"scale is:")
+        if use == 'flats':
+            print(notesflat[scaledict[scaledictlist[whatscale-1]]+np.where(notesflat == whatkey)[0][0]])
+        elif use == 'sharps':
+            print(notessharp[scaledict[scaledictlist[whatscale-1]]+np.where(notessharp == whatkey)[0][0]])
+        else: 
+            print("Using Flats:",notesflat[scaledict[scaledictlist[whatscale-1]]+np.where(notesflat == whatkey)[0][0]])
+            print("Using Sharps:",notessharp[scaledict[scaledictlist[whatscale-1]]+np.where(notessharp == whatkey)[0][0]])
+    elif what == "chord":
+        while errorchord == False:
+            print('\nWhat type of chord would you like to learn? (Please enter a number)')
+            print("1: Major \n2: Minor \n3: Augmented \n4: Diminished \n5: Major 7th \n6: Minor 7th \n7: Dominant 7th \n8: Diminished 7th")
+            whatchord = int(input())
+            if whatchord not in range(1,len(chorddict)+1): print('Error:',whatchord,'is not an option. Please select one of the options available.')
+            else: errorchord = True
+        print("\nThe",whatkey,chorddictlist[whatchord-1],"chord is:")
+        if use == 'flats':
+            print(notesflat[chorddict[chorddictlist[whatchord-1]]+np.where(notesflat == whatkey)[0][0]])
+        elif use == 'sharps':
+            print(notessharp[chorddict[chorddictlist[whatchord-1]]+np.where(notessharp == whatkey)[0][0]])
+        else: 
+            print("Using Flats:",notesflat[chorddict[chorddictlist[whatchord-1]]+np.where(notesflat == whatkey)[0][0]])
+            print("Using Sharps:",notessharp[chorddict[chorddictlist[whatchord-1]]+np.where(notessharp == whatkey)[0][0]])
+
+
+
+    
+    while leave == False:
+        cont = str(input("\nWould you like to continue? (Y/N) \n")).upper()
+        if cont == 'N': leave, end = True, True
+        elif cont == 'Y': leave, end = True, False
+        else: print('Please enter Y or N')
+
+    errorwhat, errorkey, errorscale, errorchord = False, False, False, False
+input('\nOkay, Have a nice day! Press Enter to exit \n')
+

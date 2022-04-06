@@ -1,19 +1,21 @@
-realarray = [[2,4,5,1],
-             [3,0,2,1],
-             [2,4,5,1],
-             [3,0,2,7],
-             [4,3,0,6]]
-realarray_cols = len(realarray[0])
-arrayzero = [0] * realarray_cols
+import copy
+array = [[0,0,0,0],
+         [3,0,2,1],
+         [2,4,5,6],
+         [3,0,0,5],
+         [4,3,0,6]]
+arraytemp = copy.deepcopy(array)
+array_cols = len(array[0])
+arrayzero = [0] * array_cols
+arraynonzero = [0] * array_cols
 
-arrayzero[realarray[1].index(0)] = 0
-
-for row in realarray:
+for row in arraytemp:
     for col in row:
         if col == 0:
-            arrayzero[realarray[row].index(col)] += 1
+            arrayzero[row.index(0)] += 1
+            row[row.index(col)] = None
 
-
-
+print(array)
+print(arraytemp)
 print(arrayzero)
 

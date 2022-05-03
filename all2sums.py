@@ -1,7 +1,7 @@
 import random as r
 import time as t
-n = 3
-low,high = 0,1275
+n = 100
+low,high = 0,500
 nums, sums1, sums2 = [], [], []
 
 #generate list nums of n length, randint between low to high
@@ -14,7 +14,7 @@ nums.sort()
 print('numbers:',nums)
 print('n=',n)
 
-#finding all sums of any 2 BUBBLE METHOD - not as good as brute method but interesting thought experiment
+'''#finding all sums of any 2 BUBBLE METHOD - not as good as brute method but interesting thought experiment
 print('BUBBLE METHOD:')
 start1 = t.time()
 bubble = int(len(nums)/2)
@@ -33,7 +33,7 @@ print('number of calculations:',ncalcs1)
 sums1.sort()
 end1 = t.time()
 #print(sums1)
-print('time taken:',end1-start1)
+print('time taken:',end1-start1)'''
 
 #finding all sums of any 2 BRUTE METHOD
 print('BRUTE METHOD:')
@@ -46,7 +46,7 @@ for num1 in nums:
         ncalcs2 += 1
         if thesum not in sums2: #don't have to remove duplicates anymore
             sums2.append(thesum)
-            #print(num1,'+',num2,'=',thesum)
+            print(num1,'+',num2,'=',thesum)
 print('number of calculations:',ncalcs2)
 end2 = t.time()
 #print(sums2)

@@ -18,4 +18,4 @@ def tripletzero(n=int,low=int,high=int):
 
     print('triplets:',triplist)
 
-tripletzero(7,-5,5)
+tripletzero(30,-15,10)
